@@ -76,7 +76,8 @@ const Profile = () => {
     fetchAppliedJobs();
   }, [apiUrl]);
   const handleLogOut =  ()=>{
-    localStorage.removeItem("token")
+    localStorage.removeItem("token");
+    localStorage.removeItem("role")
     navigate("/")
   }
   return (

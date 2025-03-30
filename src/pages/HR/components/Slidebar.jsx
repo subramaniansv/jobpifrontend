@@ -12,6 +12,7 @@ const Slidebar = ({ menuItems,  }) => {
   }, []);
   const handleLogOut =  ()=>{
     localStorage.removeItem("token")
+    localStorage.removeItem("role")
     navigate("/")
   }
   // Memoize menu items 

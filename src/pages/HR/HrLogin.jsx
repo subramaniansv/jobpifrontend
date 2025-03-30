@@ -26,6 +26,7 @@ const HrLogin = () => {
             localStorage.setItem("token",res.data.token);
             localStorage.setItem("userId", res.data.userId);
             navigate("/hr");
+            localStorage.setItem("role","hr")
         } catch (error) {
           toast.error(error.response.data.message);
         }
@@ -35,7 +36,8 @@ const HrLogin = () => {
           const res = await axios.post(`${apiUrl}/api/hr/hrRegister`,{name,email,password});
           toast.success("Sign up successful");
           localStorage.setItem("token",res.data.token);
-          localStorage.setItem("userId", res.data.userId)
+          localStorage.setItem("userId", res.data.userId);
+          localStorage.setItem("role","hr")
           navigate("/hr");
         } catch (error) {
           toast.error(error.response.data.message);
