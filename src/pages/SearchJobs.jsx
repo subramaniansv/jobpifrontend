@@ -74,7 +74,7 @@ const SearchJobs = () => {
         <div className="p-5 flex justify-between items-center border-b border-gray-700">
           <h1
             className="text-3xl font-bold text-amber-400 cursor-pointer"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/ur")}
           >
             Jobpi
           </h1>
@@ -226,7 +226,7 @@ const SearchJobs = () => {
               <p className="mt-2 mb-2 text-amber-100">
                 {job.company} - {job.location}
               </p>
-              <Button text={"Apply Now"} onClick={()=> navigate(`/job/${job._id}`)} />
+              <Button text={"View"} onClick={()=> navigate(`/job/${job._id}`)} />
             </div>
           ))}
           </div>

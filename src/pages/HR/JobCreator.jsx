@@ -4,14 +4,14 @@ import axios from "axios";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Edit, Trash2, FilePlus } from "lucide-react";
 import { toast } from "react-toastify";
-
+import Slidebar from "./components/Slidebar";
 const JobCreator = () => {
   const [jobs, setJobs] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const apiUrl = import.meta.env.VITE_BACKEND_URL;
-
+  const menuItems = []
   // Fetch Jobs Function
   const fetchJobs = async () => {
     if (!token) return;
@@ -78,7 +78,10 @@ const JobCreator = () => {
   };
 
   return (
-    <div className="flex lg:h-screen min-h-screen bg-gray-100 text-black relative">
+    <div className="flex text-[#0A192F] bg-white">
+    <Slidebar menuItems={menuItems}  />
+    <div className="flex-1 p-5 lg:ml-5 transition-all duration-300 max-md:ml-12">
+
       <div className="flex-1 p-6 lg:p-8">
         <h1 className="text-3xl font-bold text-[#0A192F] mb-6 max-md:ml-12">
           Your Jobs
@@ -89,12 +92,7 @@ const JobCreator = () => {
         >
           <FilePlus size={20} /> Create Blank Job
         </button>
-        <button
-          onClick={()=>navigate("/hr")}
-          className="bg-[#0A192F] text-white px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-amber-400 transition mb-6"
-        >
-           Back
-        </button>
+       <hr className="mb-5"/>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {jobs.length > 0 ? (
             jobs.map((job) => (
@@ -135,6 +133,8 @@ const JobCreator = () => {
         </div>
       </div>
     </div>
+    </div>
+    
   );
 };
 

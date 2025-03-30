@@ -5,6 +5,7 @@ import DropDown from "../components/DropDown";
 import Button from "../components/Button";
 import axios from'axios'
 import { useNavigate } from "react-router-dom";
+import Slidebar from "../components/Slidebar";
 const Dashboard = () => {
   const [userName, setUserName] = useState("")
   const navigate = useNavigate(); 
@@ -14,7 +15,7 @@ const Dashboard = () => {
   useEffect(()=>{
     const fetchUserProfile = async () => {
       try {
-        const token = localStorage.getItem("token"); // Get token from localStorage
+        const token = localStorage.getItem("token"); 
         if (!token) return;
 
         const response = await axios.get(`${apiUrl}/api/user/profile`, {
@@ -34,19 +35,9 @@ const Dashboard = () => {
     fetchUserProfile();
   },[])
  
-  const resumeOptions = [
-    { label: "Create Resume", onClick: () => navigate("/resume-builder") },
-    { label: "Analyze Resume", onClick: () => navigate("/analyze-resume") },
-  ];
 
   const menuItems = [
-    { name: "Dashboard", icon: <FaHome />, path: "/" },
-    {
-      name: "My Resumes",
-      dropdown: () => <DropDown label="My Resumes" options={resumeOptions} icon={<FaFileAlt />} />,
-    },
-    { name: "Job Search", icon: <FaSearch />, path: "/search-job" },
-    { name: "Profile", icon: <FaCog />, path: "/profile" },
+    
   ];
   const handleLogOut =  ()=>{
     localStorage.removeItem("token")
@@ -70,7 +61,8 @@ const Dashboard = () => {
   },[])
   return (
     <div className="flex text-[#0A192F] bg-white">
-      <Sidebar menuItems={menuItems} onLogout={handleLogOut} />
+      <div className="sticky top-0 h-screen"> <Slidebar menuItems={menuItems}  /></div>
+     
       <div className="flex-1 p-5 lg:ml-5 transition-all duration-300 max-md:ml-12">
         <div className="border-b border-gray-400 pb-5 lg:ml-0">
           <h2 className="text-4xl font-bold">Hello<span className="text-amber-500">! </span><span className="no-underline hover:underline hover:decoration-amber-500">{userName}..</span></h2>
@@ -115,7 +107,7 @@ const Dashboard = () => {
             <p className="mt-2 mb-2 text-amber-100">
               {job.company} - {job.location}
             </p>
-            <Button text={"Apply Now"} onClick={()=> navigate(`/job/${job._id}`)} />
+            <Button text={"View"} onClick={()=> navigate(`/job/${job._id}`)} />
           </div>
         ))}
         </div>

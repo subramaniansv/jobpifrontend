@@ -5,6 +5,9 @@ import Button from "../components/Button";
 import { toast } from "react-toastify";
 import axios from "axios";
 import {useNavigate} from'react-router-dom'
+import Slidebar from "../components/Slidebar";
+import { FaFileAlt } from "react-icons/fa";
+
 const ResumeAnalysis = () => {
   const [resume, setResume] = useState(null);
   const [isResume,setIsResume]=useState(false);
@@ -69,10 +72,16 @@ const ResumeAnalysis = () => {
     }
     toast.success(`Searching jobs for: ${resume.name}`);
   };
-
+ const menuItems = [
+    { name: "Create Resume",icon:<FaFileAlt/>, path: "/resume-builder" },
+    
+  ];
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#0a192f] text-white">
-      <h1 className="text-3xl font-bold mb-6">Upload & Analyze Resume</h1>
+    <div className="flex">
+    <Slidebar menuItems={menuItems} />
+     <div className="flex-1 flex flex-col items-center justify-center min-h-screen bg-[#0a192f] text-white">
+    
+      <h1 className="text-3xl font-bold  mb-6">Upload & Analyze Resume</h1>
 
       {/* Resume Dropzone */}
       {isResume?(<></>):(<>
@@ -117,6 +126,7 @@ const ResumeAnalysis = () => {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 };

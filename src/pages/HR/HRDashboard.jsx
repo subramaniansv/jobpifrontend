@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaHome, FaFileAlt, FaSearch, FaCog, } from "react-icons/fa";
-import Sidebar from "../../components/Sidebar";
+import Slidebar from "./components/Slidebar";
 import DropDown from "../../components/DropDown";
 import Button from "../../components/Button";
 import axios from'axios'
@@ -33,18 +33,10 @@ const HRDashboard = () => {
   
       fetchHrProfile();
     },[])
-    const resumeOptions = [
-        { label: "Posted Jobs", onClick: () => navigate("/all-jobs") },
-        { label: "Post a Job", onClick: () => navigate("/job-creater") },
-      ];
+   
     
       const menuItems = [
-        { name: "Dashboard", icon: <FaHome />, path: "/" },
-        {
-          name: "My Jobs",
-          dropdown: () => <DropDown label="My Jobs" options={resumeOptions} icon={<FaFileAlt />} />,
-        },
-        { name: "Profile", icon: <FaCog />, path: "/profile" },
+      
       ];
       const handleLogOut =  ()=>{
         localStorage.removeItem("token")
@@ -53,7 +45,7 @@ const HRDashboard = () => {
      
   return (
     <div className="flex text-[#0A192F] bg-white">
-    <Sidebar menuItems={menuItems} onLogout={handleLogOut} />
+    <Slidebar menuItems={menuItems} onLogout={handleLogOut} />
     <div className="flex-1 p-5 lg:ml-5 transition-all duration-300 max-md:ml-12">
       <div className="border-b border-gray-400 pb-5 lg:ml-0">
         <h2 className="text-4xl font-bold">Hello<span className="text-amber-500">! </span><span className="no-underline hover:underline hover:decoration-amber-500">{hrName}..</span></h2>
@@ -65,7 +57,7 @@ const HRDashboard = () => {
             <p className="mt-2 text-amber-100">Create and Post your Jobs easily.</p>
             <div className="flex gap-4 mt-4">
             <Button text={"Create Job"}  onClick={()=>navigate("/job-creator")}/>
-            <Button text={"My Jobs"} onClick={()=>navigate("/all-jobs")}/>
+            <Button text={"My Jobs"} onClick={()=>navigate("/hr-all-jobs")}/>
      </div>
           </div>
           </div>

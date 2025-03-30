@@ -2,7 +2,7 @@ import React from "react";
 import { FaArrowRight } from "react-icons/fa";
 
 const Button = ({ text, onClick }) => {
-  const showArrow = text === "Create Resume" || text === "Analyse Resume" || text === "Apply Now";
+  const showArrow = text === "Create Resume" || text === "Analyse Resume" || text === "View";
 
   return (
     <button

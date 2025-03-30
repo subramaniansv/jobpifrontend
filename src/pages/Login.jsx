@@ -25,7 +25,7 @@ const Login = () => {
           console.log(res.data);
           localStorage.setItem("token",res.data.token);
           localStorage.setItem("userId", res.data.userId);
-          navigate("/");
+          navigate("/ur");
       } catch (error) {
         toast.error(error.response.data.message);
       }
@@ -36,7 +36,7 @@ const Login = () => {
         toast.success("Sign up successful");
         localStorage.setItem("token",res.data.token);
         localStorage.setItem("userId", res.data.userId)
-        navigate("/");
+        navigate("/ur");
       } catch (error) {
         toast.error(error.response.data.message);
         console.log(error)

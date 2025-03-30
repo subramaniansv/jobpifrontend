@@ -18,6 +18,10 @@ import HrLogin from "./pages/HR/HrLogin";
 import HRDashboard from "./pages/HR/HRDashboard";
 import JobCreator from "./pages/HR/JobCreator";
 import EditJob from "./pages/HR/EditJob";
+import HrProfile from "./pages/HR/HrProfile";
+import Applications from "./pages/HR/Applications";
+import AllJobs from "./pages/HR/AllJobs";
+import HrJobDetails from "./pages/HR/HrJobDetails";
 function AppContent() {
   const location = useLocation();
   const hideNavbarRoutes = ["/login", "/signup","/hr-login"];
@@ -29,11 +33,11 @@ function AppContent() {
       <ToastContainer position="top-right" autoClose={3000} />
       <Routes>
         {/* Redirect to Dashboard if authenticated, else show Home */}
-        <Route path="/" element={token ? <Dashboard /> : <Home />} />
+        <Route path="/" element={<Home />}/>
         <Route path="/login" element={<Login />} />
         
         <Route path="/profile" element={token ? <Profile /> : <Navigate to="/login" />} />
-        <Route path="/dashboard" element={token ? <Dashboard /> : <Navigate to="/login" />} />
+        <Route path="/ur" element={token ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="/search-job" element={token ? <SearchJobs /> : <Navigate to="/login" />} />
         <Route path="/analyze-resume" element={token ? <ResumeAnalysis /> : <Navigate to="/login" />} />
         <Route path="/resume-builder" element={token ? <ResumeBuilder /> : <Navigate to="/login" />} />
@@ -43,8 +47,12 @@ function AppContent() {
         {/*HR Pages Route*/}
         <Route path="/hr" element={token ? <HRDashboard /> : <Home />} />
         <Route path="/hr-login" element={<HrLogin />} />
-        <Route path="job-creator" element={token ? <JobCreator /> : <Home />}/>
+        <Route path="/job-creator" element={token ? <JobCreator /> : <Home />}/>
         <Route path="/edit-job/:jobId" element={<EditJob />} />
+        <Route path="/hr-profile" element={token ? <HrProfile /> : <Navigate to="/login" />} />
+        <Route path="hr-all-jobs" element={token ? <AllJobs /> : <Navigate to="/login" />} />
+        <Route path="/hr-job/:jobId" element={token ? <HrJobDetails /> : <Navigate to="/login" />} />
+        <Route path="/hr-applications" element={token ? <Applications /> : <Navigate to="/login" />} />
       </Routes>
     </>
   );

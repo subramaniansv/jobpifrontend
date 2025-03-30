@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { FaBars, FaTimes } from "react-icons/fa";
-import { Edit, Trash2, Eye, Download,FilePlus } from "lucide-react"; 
+import { FaBars, FaSearch, FaTimes } from "react-icons/fa";
+import { Edit, Trash2, Eye, Download,FilePlus, icons } from "lucide-react"; 
 import { toast } from "react-toastify";
+import Slidebar from "../components/Slidebar";
 const ResumeBuilder = () => {
   const [resumes, setResumes] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const apiUrl = import.meta.env.VITE_BACKEND_URL;
-
+  const menuItems = [
+    { name: "Analyze Resume",icon:<FaSearch/>, path: "/analyze-resume" },
+    
+  ];
   useEffect(() => {
     if (token) {
       fetchResumes();
@@ -108,49 +112,9 @@ const ResumeBuilder = () => {
 
   return (
     <div className="flex lg:h-screen min-h-screen bg-gray-100 text-black relative">
-      {!isSidebarOpen && (
-        <button
-          onClick={() => setIsSidebarOpen(true)}
-          className="lg:hidden fixed top-4 left-4 text-black bg-gray-800 p-2 rounded-full z-50"
-        >
-          <FaBars size={24} />
-        </button>
-      )}
-      <div
-        className={`${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 lg:relative w-64 bg-[#0A192F] p-6 flex flex-col items-start border-r border-[#f9b925] fixed top-0 left-0 h-full transition-transform duration-300 z-40`}
-      >
-        <div className="flex justify-between w-full items-center mb-6">
-          <h1 className="text-2xl font-bold text-amber-400">Jobpi</h1>
-          <button
-            onClick={() => setIsSidebarOpen(false)}
-            className="lg:hidden text-white bg-gray-700 p-2 rounded-full hover:text-amber-400"
-          >
-            <FaTimes size={20} />
-          </button>
-        </div>
-        <nav className="flex flex-col space-y-4 w-full">
-          <button
-            className="text-white hover:border-l-4 hover:border-l-[#f9b925] w-full px-4 py-2 flex items-center gap-2 hover:text-amber-400 transition"
-            onClick={createBlankResume}
-          >
-            Create New Resume
-          </button>
-          <button
-            className="text-white hover:border-l-4 hover:border-l-[#f9b925] w-full px-4 py-2 flex items-center gap-2 hover:text-amber-400 transition"
-            onClick={() => navigate("/analyze-resume")}
-          >
-            Analyze Resume
-          </button>
-          <button
-            className="text-white hover:border-l-4 hover:border-l-[#f9b925] w-full px-4 py-2 flex items-center gap-2 hover:text-amber-400 transition"
-            onClick={() => navigate("/")}
-          >
-            Back
-          </button>
-        </nav>
-      </div>
+        <div className="sticky top-0 h-screen"> 
+     <Slidebar menuItems={menuItems}  />
+     </div>
 
       <div className="flex-1 p-6 lg:p-8">
         <h1 className="text-3xl font-bold text-[#0A192F] mb-6 max-md:ml-12">Your Resumes</h1>
